@@ -13,3 +13,7 @@ go get go.mongodb.org/mongo-driver/bson
 >> go build -o go-api-server main3.go
 >>
 >> 
+
+##Compile (dari linux)
+chmod +x go-api-server
+./go-api-server
