@@ -1,7 +1,7 @@
 ### Bekerja dalam folder
 mkdir MyFolder
 
-### inisialisasi awal
+### inisialisasi awal (buka terminal di vscode/antigravity)
 go mod init MyFolder
 
 ### Jalankan coding
