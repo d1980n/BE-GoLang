@@ -20,3 +20,6 @@ go get go.mongodb.org/mongo-driver/bson
 ##Compile (dari linux)
 chmod +x go-api-server
 ./go-api-server
+
+# 4. file: main4.go
+>> tambahan /picture masih dalam progres
