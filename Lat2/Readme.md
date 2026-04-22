@@ -23,3 +23,5 @@ chmod +x go-api-server
 
 # 4. file: main4.go
 >> tambahan /picture masih dalam progres
+# 5. file: main5.go
+>> perbaikan /picture/CAM2-0001.jpg
