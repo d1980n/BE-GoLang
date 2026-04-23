@@ -1,94 +1,106 @@
-# Cross Compile (langsung)
-## di linux
-``` sh
-Cek Arch: uname -m / lscpu
-```
-## di windows
-``` sh
-Build Go: GOOS=linux GOARCH=${ARCH-TYPE} go build -o bin/main
-arm32: GOOS=linux GOARCH=arm GOARM=7 go build -o bin/main
-```
-============================================================
-# Menjalankan Beberapa File `.go` dalam Satu Proyek
+# Install Swagger di Golang (Swaggo)
 
-Jika Anda memiliki beberapa file `.go` dalam satu proyek dan ingin
-menjalankannya menggunakan terminal, ada beberapa cara untuk
-melakukannya:
+Panduan ini menjelaskan cara menginstall dan menggunakan Swagger di Golang menggunakan **Swaggo (`swag`)**.
 
-------------------------------------------------------------------------
+---
 
-## **1. Jalankan File Secara Langsung (Tanpa Compile)**
+## 🚀 1. Install Swagger CLI (`swag`)
 
-Jika proyek Anda memiliki beberapa file `.go` yang saling terkait dalam
-satu package, cukup jalankan perintah berikut di dalam direktori proyek:
+Jalankan perintah berikut di terminal:
 
-``` sh
-go run main.go file1.go file2.go
+```bash
+go install github.com/swaggo/swag/cmd/swag@latest
 ```
 
-Perintah ini akan menjalankan semua file `.go` yang disebutkan secara
-langsung.
+Cek apakah instalasi berhasil:
 
-------------------------------------------------------------------------
-
-## **2. Jalankan Seluruh File dalam Satu Folder**
-
-Jika semua file `.go` ada dalam satu folder dan menggunakan package yang
-sama, Anda bisa menjalankannya dengan:
-
-``` sh
-go run .
+```bash
+swag --version
 ```
 
-atau:
+---
 
-``` sh
-go run *.go
+## ⚠️ Jika `swag` Tidak Dikenali
+
+Tambahkan ke PATH:
+
+### Linux / Mac
+
+```bash
+export PATH=$PATH:$(go env GOPATH)/bin
 ```
 
-------------------------------------------------------------------------
+### Windows (CMD)
 
-## **3. Compile dan Jalankan**
-
-Jika ingin mengompilasi semua file `.go` menjadi satu file biner yang
-dapat dieksekusi:
-
-``` sh
-go build -o myapp
+```bash
+set PATH=%PATH%;%GOPATH%\bin
 ```
 
-Lalu jalankan hasilnya:
+---
 
-``` sh
-./myapp
+## 📦 2. Install Library Swagger di Project
+
+Masuk ke folder project Go:
+
+```bash
+go mod init nama_project   # jika belum ada go.mod
 ```
 
-------------------------------------------------------------------------
+Install dependency Swagger:
 
-## **4. Menggunakan Modul Go**
-
-Jika proyek Anda menggunakan **Go Modules**, pastikan file `go.mod`
-sudah diinisialisasi dengan:
-
-``` sh
-go mod init nama_proyek
+```bash
+go get -u github.com/swaggo/gin-swagger
+go get -u github.com/swaggo/files
 ```
 
-Lalu gunakan:
+---
 
-``` sh
-go run .
+## 🧪 3. Generate Swagger Docs
+
+Setelah menambahkan komentar Swagger di kode Go, jalankan:
+
+```bash
+swag init
 ```
 
-------------------------------------------------------------------------
+Jika berhasil, akan muncul folder:
 
-## **Catatan**
+```
+docs/
+```
 
--   Semua file `.go` harus berada dalam package yang sama (misalnya
-    `package main` jika ingin langsung dieksekusi).
--   Jika ada beberapa package dalam satu proyek, pastikan package utama
-    (`main`) memanggil fungsi dari package lain dengan `import`.
+---
 
-------------------------------------------------------------------------
+## 🌐 4. Akses Swagger UI
 
-Apakah Anda mengalami error saat menjalankan beberapa file `.go`? 🚀
+Setelah server dijalankan, buka di browser:
+
+```
+http://localhost:8080/swagger/index.html
+```
+
+---
+
+## 🧠 Ringkasan
+
+| Langkah         | Perintah                                            |
+| --------------- | --------------------------------------------------- |
+| Install CLI     | `go install github.com/swaggo/swag/cmd/swag@latest` |
+| Cek versi       | `swag --version`                                    |
+| Init module     | `go mod init nama_project`                          |
+| Install library | `go get -u github.com/swaggo/gin-swagger`           |
+| Generate docs   | `swag init`                                         |
+| Jalankan server | `go run .`                                          |
+
+---
+
+## ⚡ Catatan Penting
+
+* `swag` adalah generator → membutuhkan komentar annotation di kode
+* Pastikan file `go.mod` sudah ada
+* Jalankan ulang `swag init` setiap ada perubahan API
+* Gunakan framework seperti Gin untuk integrasi yang lebih mudah
+
+---
+
+Dengan langkah ini, Swagger siap digunakan untuk dokumentasi API di project Golang Anda 🚀
