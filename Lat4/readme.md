@@ -49,3 +49,13 @@ Body JSON: {"guid":"...", "username":"baru", "password":"baru123"}
 Endpoint	Method	Fungsi
 /api1/edit-reg	POST	Edit user by GUID
 /api2/edit-reg	PUT	Edit user by GUID
+
+Endpoint baru: DELETE /api/del-reg
+Request body (JSON):
+
+json
+{"guid": "uuid-yang-mau-dihapus"}
+Response:
+
+200 — "Hapus user berhasil"
+404 — "User dengan GUID tersebut tidak ditemukan"
